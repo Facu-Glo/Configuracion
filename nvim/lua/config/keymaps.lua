@@ -1,9 +1,29 @@
+-- Salir de NVIM
+-- vim.keymap.set("n", "<C-q>", ":q<CR>", { noremap = true, silent = true })
+
+--Buffer
+vim.keymap.set("n", "<Tab>", ":bnext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", { noremap = true, silent = true })
+
+-- Press jk fast to exit insert mode
+vim.keymap.set("i", "jj", "<ESC>")
+
 -- Select all
-vim.keymap.set("n", "<C-a>", function()
+vim.keymap.set("n", "<leader>a", function()
   vim.cmd("keepjumps normal! ggVG")
 end, { desc = "Seleccionar todo el archivo" })
 
-vim.keymap.set("n", "'dm", ":delmarks!<CR>", { desc = "Eliminar todas las marcas" })
+-- Activar/Desactivar numeros relativos
+vim.keymap.set("n", "<leader>ra", function()
+  vim.opt.relativenumber = true
+end, { desc = "Activar números relativos" })
+
+vim.keymap.set("n", "<leader>rd", function()
+  vim.opt.relativenumber = false
+end, { desc = "Desactivar números relativos" })
+
+-- Eliminar las marcas
+vim.keymap.set("n", "'dd", ":delmarks!<CR>", { desc = "Eliminar todas las marcas" })
 
 -- Ir primer caracter de una linea
 vim.keymap.set({ "n", "v" }, "<leader>0", "^", { noremap = true, silent = true, desc = "Ir al inicio de la linea" })
@@ -23,8 +43,8 @@ vim.keymap.set({ "n", "t" }, "<leader>t", function()
 end, { desc = "Toggle terminal" })
 
 --Redimensionar terminal
-vim.keymap.set("t", "<C-Up>", "<cmd>resize +2<cr>")
-vim.keymap.set("t", "<C-Down>", "<cmd>resize -2<cr>")
+vim.keymap.set("t", "<C-Up>", "<cmd>resize +1<cr>")
+vim.keymap.set("t", "<C-Down>", "<cmd>resize -1<cr>")
 
 -- Oil
 vim.keymap.set("n", "<leader>o", "<CMD>Oil --float<CR>", { desc = "Open Oil in current directory" })
@@ -71,6 +91,57 @@ vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", { noremap = true, silent = true 
 -- Navegar al split de abajo con Ctrl + j
 vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
 
+-- Explorador archivo
+vim.keymap.set(
+  "n",
+  "<leader>e",
+  ":lua Snacks.picker.explorer()<CR>",
+  { desc = "Abrir el explorador de archivos", noremap = true, silent = true }
+)
+
+-- Snacks picker
+vim.keymap.set(
+  "n",
+  "<leader><leader>",
+  ":lua Snacks.picker.files()<CR>",
+  { desc = "Buscar archivos", noremap = true, silent = true }
+)
+vim.keymap.set(
+  "n",
+  "<leader>ff",
+  ":lua Snacks.picker.files()<CR>",
+  { desc = "Buscar archivos (cwd)", noremap = true, silent = true }
+)
+vim.keymap.set(
+  "n",
+  "<leader>fg",
+  ":lua Snacks.picker.grep()<CR>",
+  { desc = "Buscar texto en archivos", noremap = true, silent = true }
+)
+vim.keymap.set(
+  "n",
+  "<leader>fb",
+  ":lua Snacks.picker.buffers()<CR>",
+  { desc = "Buffers", noremap = true, silent = true }
+)
+vim.keymap.set(
+  "n",
+  "<leader>fk",
+  ":lua Snacks.picker.keymaps()<CR>",
+  { desc = "keymaps", noremap = true, silent = true }
+)
+vim.keymap.set(
+  "n",
+  "<leader>z",
+  ":lua Snacks.picker.zoxide()<CR>",
+  { desc = "Buscar directorios (zoxide)", noremap = true, silent = true }
+)
+vim.keymap.set(
+  "n",
+  "<leader>fh",
+  ":lua Snacks.picker.files({ cwd = vim.fn.expand('~') })<CR>",
+  { desc = "Buscar archivos (home)", noremap = true, silent = true }
+)
 --vim.keymap.set("n", "<leader>f", function()
 --	require("conform").format({ async = true })
 --end, { noremap = true, silent = true, desc = "Format file" })

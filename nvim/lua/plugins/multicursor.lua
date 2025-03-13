@@ -1,6 +1,7 @@
 return {
   "jake-stewart/multicursor.nvim",
   branch = "1.0",
+
   config = function()
     local mc = require("multicursor-nvim")
 
@@ -8,7 +9,7 @@ return {
 
     local wk = require("which-key")
     wk.add({
-      { "<leader>m", name = "Multicursores", icon = "󰇀" },
+      { "<leader>m", name = "Multicursores", icon = { icon = "󰇀", color = "grey" } },
     })
 
     local set = vim.keymap.set
