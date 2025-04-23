@@ -7,6 +7,7 @@ export ZSH="$HOME/.oh-my-zsh"
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/home/facu/Aplicaciones
 export PATH="$HOME/.local/bin:$PATH"
+export PATH=$PATH:$HOME/go/bin
 
 export EDITOR=nvim
 export VISUAL=nvim
@@ -85,7 +86,7 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-
+source <(fzf --zsh)
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -131,6 +132,20 @@ alias fl="y"
 alias icat="kitten icat"
 alias pdf="zathura"
 alias lgit="lazygit"
+alias fzf="fzf --style full --preview 'bat --color=always {}'"
+alias fzfm="fzf --height 40% --layout reverse --info inline --border --preview 'bat --color=always {}' --preview-window right,50%,border-horizontal --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
+alias bmake="bear -- make"
+alias mnvim='NVIM_APPNAME=nvim-minimal nvim'
+alias mnv='NVIM_APPNAME=nvim-minimal nvim'
+alias open='xdg-open'
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
+
+# pnpm
+# export PNPM_HOME="/home/facu/.local/share/pnpm"
+# case ":$PATH:" in
+#   *":$PNPM_HOME:"*) ;;
+#   *) export PATH="$PNPM_HOME:$PATH" ;;
+# esac
+# pnpm end
