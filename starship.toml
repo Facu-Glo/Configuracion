@@ -1,10 +1,10 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[](color_azul)\
+[](color_violeta)\
 $os\
 $username\
-[](bg:color_azule fg:color_azul)\
+[](bg:color_azule fg:color_violeta)\
 $directory\
 [](fg:color_azule bg:color_git)\
 $git_branch\
@@ -23,9 +23,9 @@ $python\
 $docker_context\
 $conda\
 [](fg:color_bg3 bg:color_bg1)\
-
 [ ](fg:color_bg1)\
-$line_break$character"""
+$line_break\
+$character"""
 
 palette = 'gruvbox_dark'
 
@@ -40,16 +40,15 @@ color_orange = '#d65d0e'
 color_purple = '#b16286'
 color_red = '#cc241d'
 color_yellow = '#d79921'
-color_azul = '#7545eb'
+color_violeta = '#7545eb'
 color_azule = '#7a99ff'
-color_violeta = '#ff32e0'
 color_verde = '#27c700'
 color_negro = '#000000'
 color_git = '#2dcbc0'
 
 [os]
 disabled = false
-style = "bg:color_azul fg:color_fg0"
+style = "bg:color_violeta fg:color_fg0"
 
 [os.symbols]
 Windows = "󰍲"
@@ -76,12 +75,12 @@ Pop = ""
 
 [username]
 show_always = true
-style_user = "bg:color_azul fg:color_fg0"
-style_root = "bg:color_azul fg:color_fg0"
+style_user = "bold bg:color_violeta fg:color_fg0"
+style_root = "bg:color_violeta fg:color_fg0"
 format = '[ $user ]($style)'
 
 [directory]
-style = "fg:color_negro bg:color_azule"
+style = "bold fg:color_negro bg:color_azule"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -95,8 +94,8 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:color_git"
-format = '[[ $symbol $branch ](fg:color_negro bg:color_git)]($style)'
+style = "fg:color_negro bg:color_git"
+format = '[ $symbol](bold fg:color_negro bg:color_git)[ $branch ](bold fg:color_negro bg:color_git)'
 
 [git_status]
 style = "bg:color_git"
@@ -167,9 +166,9 @@ disabled = false
 
 [character]
 disabled = false
-success_symbol = '[](bold fg:color_verde)'
-error_symbol = '[](bold fg:color_red)'
-vimcmd_symbol = '[](bold fg:color_green)'
-vimcmd_replace_one_symbol = '[](bold fg:color_purple)'
-vimcmd_replace_symbol = '[](bold fg:color_purple)'
-vimcmd_visual_symbol = '[](bold fg:color_yellow)'
+success_symbol = '[❯](bold fg:green)'
+error_symbol = '[❯](bold fg:red)'
+vimcmd_symbol = '[❮](bold fg:green)'
+vimcmd_replace_one_symbol = '[❮](bold fg:lavender)'
+vimcmd_replace_symbol = '[❮](bold fg:lavender)'
+vimcmd_visual_symbol = '[❮](bold fg:yellow)'
