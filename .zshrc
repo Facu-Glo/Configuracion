@@ -1,104 +1,131 @@
-# ---------- COMPLETIONS ----------
+# ===================================================================
+#                       ZSH CONFIGURATION 
+# ===================================================================
+
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║                           CORE SETUP                             ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+# Initialize completion system
 autoload -Uz compinit
 compinit
-# >>> FZF-TAB INICIO <<<
+
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║                          PLUGINS                                 ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+# FZF Tab Plugin
 source ~/.fzf-tab/fzf-tab.plugin.zsh
+
+# Zsh Autosuggestions
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Syntax Highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# History Substring Search
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║                        COMPLETION STYLES                         ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+# Completion formatting
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' menu no
+
+# FZF Tab styles
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
+# Enable dircolors
 eval "$(dircolors -b)"
-zstyle ':completion:*' menu no
 
-# ---------- AUTOSUGGESTIONS ----------
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║                         HISTORY SETUP                            ║
+# ╚══════════════════════════════════════════════════════════════════╝
 
-# ---------- SYNTAX HIGHLIGHTING ----------
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# ---------- HISTORY SUBSTRING SEARCH ----------
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N history-substring-search-up
-zle -N history-substring-search-down
-
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-bindkey "^[[Z" reverse-menu-complete
-
-if command -v fzf > /dev/null; then
-
-  fzf-history-widget() {
-    local selected
-    selected=$(history -n 1 | tac | fzf --height=40% --reverse --border --prompt="Hist > ")
-    if [[ -n $selected ]]; then
-      LBUFFER="${selected#*[0-9]  }"
-    fi
-    zle reset-prompt 
-  }
-  zle -N fzf-history-widget
-  bindkey '^R' fzf-history-widget
-
-fi
-
-# ---------- KEYBINDING ----------
-bindkey "^[[3~" delete-char
-
-# ---------- ALIASES ----------
-alias ll='ls -la --color=auto'
-alias ls='ls --color=auto'
-alias ff='fastfetch'
-alias fl='y'
-alias nv='nvim'
-alias vim='nvim'
-alias lgit='lazygit'
-alias bmake="bear -- make"
-alias open='xdg-open'
-alias pdf="zathura"
-alias fzfr="fd . / --type d --hidden --follow --exclude .git | fzf --preview 'tree -C {} | head -100'" # fzf desde root, aunque con ** hace lo mismo y mas
-# alias fzf="fzf --style full --layout reverse --height 40% --preview 'bat --color=always {}'"
-
-# ---------- OPTIONS ----------
+# History configuration
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
+
+# History options
 setopt inc_append_history
 setopt share_history
+
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║                         ZSH OPTIONS                              ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
 setopt autocd
 setopt correct
 setopt complete_in_word
 
-# ---------- YAZI ----------
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
-}
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║                        KEY BINDINGS                              ║
+# ╚══════════════════════════════════════════════════════════════════╝
 
-# ---------- PROMPT ----------
-eval "$(starship init zsh)"
+# History substring search bindings
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N history-substring-search-up
+zle -N history-substring-search-down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
-# ---------- ZOXIDE ----------
-eval "$(zoxide init zsh)"
+# Other key bindings
+bindkey "^[[Z" reverse-menu-complete
+bindkey "^[[3~" delete-char
 
-# ---------- PATH ----------
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║                       ENVIRONMENT VARIABLES                      ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
 export PATH="$PATH:$HOME/.local/bin"
 export EDITOR=nvim
 export TERMINAL=kitty
 export FZF_DEFAULT_OPTS="--style=full --layout=reverse --height=40% --tiebreak=begin"
+export FZF_COMPLETION_TRIGGER=',,'
 
-# ---------- FZF ----------
-# fzf shell extensions
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║                           ALIASES                                ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+# File operations
+alias ll='ls -la --color=auto'
+alias ls='ls --color=auto'
+alias open='xdg-open'
+
+# Navigation
+alias fl='y'  # yazi shortcut
+
+# Editors
+alias nv='nvim'
+alias vim='nvim'
+
+# Applications
+alias ff='fastfetch'
+alias lgit='lazygit'
+alias pdf="zathura"
+
+# Development
+alias bmake="bear -- make"
+
+# FZF utilities
+alias fzfr="fd . / --type d --hidden --follow --exclude .git | fzf --preview 'tree -C {} | head -100'"
+
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║                         FZF SETUP                                ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+# FZF shell extensions
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 
+# FZF completion functions
 _fzf_compgen_dir() {
     fd --type d --hidden --follow --exclude .git . "$1"
 }
@@ -110,7 +137,6 @@ _fzf_compgen_path() {
 _fzf_comprun() {
   local command=$1
   shift
-
   case "$command" in
     cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
     export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
@@ -119,14 +145,55 @@ _fzf_comprun() {
   esac
 }
 
-# ---------- FUNCIONES ----------
-delete_last_path_component() {
-  local path=$BUFFER
-  BUFFER=${path%/*}
-  [[ -z $BUFFER ]] && BUFFER="/"
-  CURSOR=${#BUFFER}
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║                         FUNCTIONS                                ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+# Custom history widget with FZF
+fzf-history-widget() {
+    if command -v fzf > /dev/null; then
+        local selected
+        selected=$(history -n 1 | tac | fzf --height=40% --reverse --border --prompt="Hist > ")
+        if [[ -n $selected ]]; then
+            LBUFFER="${selected#*[0-9]  }"
+        fi
+        zle reset-prompt 
+    fi
 }
 
+# Yazi wrapper function
+y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd < "$tmp"
+    [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+    rm -f -- "$tmp"
+}
+
+# Delete last path component (smart backspace)
+delete_last_path_component() {
+    local path=$BUFFER
+    BUFFER=${path%/*}
+    [[ -z $BUFFER ]] && BUFFER="/"
+    CURSOR=${#BUFFER}
+}
+
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║                       WIDGET REGISTRATION                        ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+# Register custom widgets
+zle -N fzf-history-widget
 zle -N delete_last_path_component
 
+# Bind custom widgets to keys
+bindkey '^R' fzf-history-widget
 bindkey '^H' delete_last_path_component  # Ctrl+Backspace
+
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║                      EXTERNAL TOOLS INIT                         ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+# Initialize external tools
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
