@@ -118,3 +118,15 @@ _fzf_comprun() {
     *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
   esac
 }
+
+# ---------- FUNCIONES ----------
+delete_last_path_component() {
+  local path=$BUFFER
+  BUFFER=${path%/*}
+  [[ -z $BUFFER ]] && BUFFER="/"
+  CURSOR=${#BUFFER}
+}
+
+zle -N delete_last_path_component
+
+bindkey '^H' delete_last_path_component  # Ctrl+Backspace
