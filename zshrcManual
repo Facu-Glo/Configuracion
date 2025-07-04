@@ -11,9 +11,6 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
 eval "$(dircolors -b)"
-# zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-# zstyle ':completion:*' menu select
 zstyle ':completion:*' menu no
 
 # ---------- AUTOSUGGESTIONS ----------
@@ -63,8 +60,8 @@ alias lgit='lazygit'
 alias bmake="bear -- make"
 alias open='xdg-open'
 alias pdf="zathura"
-alias fzf="fzf --style full --preview 'bat --color=always {}'"
-alias fzfm="fzf --height 40% --layout reverse --info inline --border --preview 'bat --color=always {}' --preview-window right,50%,border-horizontal --bind 'ctrl-/:change-preview-window(50%|hidden|)'"
+alias fzfr="fd . / --type d --hidden --follow --exclude .git | fzf --preview 'tree -C {} | head -100'" # fzf desde root, aunque con ** hace lo mismo y mas
+# alias fzf="fzf --style full --layout reverse --height 40% --preview 'bat --color=always {}'"
 
 # ---------- OPTIONS ----------
 HISTFILE=~/.zsh_history
@@ -93,5 +90,31 @@ eval "$(zoxide init zsh)"
 
 # ---------- PATH ----------
 export PATH="$PATH:$HOME/.local/bin"
+export EDITOR=nvim
+export TERMINAL=kitty
+export FZF_DEFAULT_OPTS="--style=full --layout=reverse --height=40% --tiebreak=begin"
 
+# ---------- FZF ----------
+# fzf shell extensions
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 
+_fzf_compgen_dir() {
+    fd --type d --hidden --follow --exclude .git . "$1"
+}
+
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
+    export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
+    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+    *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
+  esac
+}
