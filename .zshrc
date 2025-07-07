@@ -80,6 +80,7 @@ bindkey '^[[B' history-substring-search-down
 bindkey "^[[Z" reverse-menu-complete
 bindkey "^[[3~" delete-char
 
+bindkey -s ^a "nvims\n"
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                       ENVIRONMENT VARIABLES                      ║
 # ╚══════════════════════════════════════════════════════════════════╝
@@ -100,11 +101,12 @@ alias ls='ls --color=auto'
 alias open='xdg-open'
 
 # Navigation
-alias fl='y'  # yazi shortcut
+alias fl='y'  
 
 # Editors
 alias nv='nvim'
 alias vim='nvim'
+alias nvim-alt='NVIM_APPNAME=nvim-alt nvim'
 
 # Applications
 alias ff='fastfetch'
@@ -177,6 +179,7 @@ delete_last_path_component() {
     [[ -z $BUFFER ]] && BUFFER="/"
     CURSOR=${#BUFFER}
 }
+
 
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                       WIDGET REGISTRATION                        ║
