@@ -84,6 +84,7 @@ style = "bold fg:color_negro bg:color_azule"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
+truncate_to_repo = false
 
 [directory.substitutions]
 "Documents" = "󰈙 "
