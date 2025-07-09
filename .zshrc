@@ -80,7 +80,6 @@ bindkey '^[[B' history-substring-search-down
 bindkey "^[[Z" reverse-menu-complete
 bindkey "^[[3~" delete-char
 
-bindkey -s ^a "nvims\n"
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                       ENVIRONMENT VARIABLES                      ║
 # ╚══════════════════════════════════════════════════════════════════╝
@@ -90,6 +89,12 @@ export EDITOR=nvim
 export TERMINAL=kitty
 export FZF_DEFAULT_OPTS="--style=full --layout=reverse --height=40% --tiebreak=begin"
 export FZF_COMPLETION_TRIGGER=',,'
+
+export PNPM_HOME="/home/facu/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                           ALIASES                                ║
@@ -200,3 +205,4 @@ bindkey '^H' delete_last_path_component  # Ctrl+Backspace
 # Initialize external tools
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
+
