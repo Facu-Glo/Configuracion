@@ -75,6 +75,7 @@ export FZF_DEFAULT_OPTS="--style=full --layout=reverse --height=40% --tiebreak=b
 export FZF_COMPLETION_TRIGGER=',,'
 
 export PNPM_HOME="/home/facu/.local/share/pnpm"
+
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -171,27 +172,47 @@ delete_last_path_component() {
 }
 
 # Funcion para buscar proyectos con git
+
+GIT_SEARCH_PATHS=(
+    /home/facu/
+)
+
+GIT_IGNORE_PATHS=(
+    -E ".local"
+    -E "go"
+    -E ".zen"
+    -E "node_modules"
+    -E "__pycache__"
+    -E ".cache"
+    -E ".fzf-tab"
+    -E "yay"
+    -E ".mozilla"
+)
+
 _findgit() {
     local dir
     dir=$(
-        fd -t d -H .git ~/Proyectos ~/.config/nvim ~/Notas-Markdown ~/Escritorio/Facultad/ --exec dirname {} \; | sort -u | while read d; do
-            if [[ -n $(git -C "$d" status --short) ]]; then
-                echo -e "1\t$d\t\033[31m$d\033[0m"
-            else
-                echo -e "2\t$d\t\033[37m$d\033[0m"
+        fd -t d -H .git "${GIT_SEARCH_PATHS[@]}" "${GIT_IGNORE_PATHS[@]}" --exec dirname {} \; | sort -u | while read -r d; do
+            if git -C "$d" rev-parse --is-inside-work-tree &>/dev/null && \
+               [[ "$(git -C "$d" rev-parse --show-toplevel 2>/dev/null)" == "$d" ]]; then
+                if [[ -n $(git -C "$d" status --short 2>/dev/null) ]]; then
+                    echo -e "1\t$d\t\033[31m$d\033[0m"
+                else
+                    echo -e "2\t$d\t\033[37m$d\033[0m"
+                fi
             fi
         done | sort | cut -f2,3 | fzf --ansi --with-nth=2 --preview '
-            echo "\033[32m󰊢 Git Status:\033[0m" &&
-            status_output=$(git -C {1} -c color.status=always status --short)
+            echo -e "\033[32m󰊢 Git Status:\033[0m"
+            status_output=$(git -C {1} -c color.status=always status --short 2>/dev/null)
             if [[ -n "$status_output" ]]; then
                 echo "$status_output"
             else
                 echo "No hay modificaciones"
             fi
-            echo "\n📁 Contenido:" &&
-            (exa --color=always -la {1} || ls -la {1}) &&
+            echo -e "\n📁 Contenido:"
+            (exa --color=always -la {1} || ls -la {1})
         ' | cut -f1
-        )
+    )
     [[ -n $dir ]] && cd "$dir"
 }
 
