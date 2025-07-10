@@ -187,6 +187,7 @@ GIT_IGNORE_PATHS=(
     -E ".fzf-tab"
     -E "yay"
     -E ".mozilla"
+    -E "Gentleman.Dots"
 )
 
 _findgit() {
