@@ -20,11 +20,11 @@ source ~/.fzf-tab/fzf-tab.plugin.zsh
 # Zsh Autosuggestions
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# Syntax Highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 # History Substring Search
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# Syntax Highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                        COMPLETION STYLES                         ║
@@ -65,22 +65,6 @@ setopt correct
 setopt complete_in_word
 
 # ╔══════════════════════════════════════════════════════════════════╗
-# ║                        KEY BINDINGS                              ║
-# ╚══════════════════════════════════════════════════════════════════╝
-
-# History substring search bindings
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N history-substring-search-up
-zle -N history-substring-search-down
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
-# Other key bindings
-bindkey "^[[Z" reverse-menu-complete
-bindkey "^[[3~" delete-char
-
-# ╔══════════════════════════════════════════════════════════════════╗
 # ║                       ENVIRONMENT VARIABLES                      ║
 # ╚══════════════════════════════════════════════════════════════════╝
 
@@ -101,8 +85,8 @@ esac
 # ╚══════════════════════════════════════════════════════════════════╝
 
 # File operations
-alias ll='ls -la --color=auto'
 alias ls='ls --color=auto'
+alias ll='eza -la --color=auto --icons'
 alias open='xdg-open'
 
 # Navigation
@@ -123,6 +107,7 @@ alias bmake="bear -- make"
 
 # FZF utilities
 alias fzfr="fd . / --type d --hidden --follow --exclude .git | fzf --preview 'tree -C {} | head -100'"
+alias fgit='_findgit'
 
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                         FZF SETUP                                ║
@@ -185,6 +170,29 @@ delete_last_path_component() {
     CURSOR=${#BUFFER}
 }
 
+# Funcion para buscar proyectos con git
+_findgit() {
+    local dir
+    dir=$(fd -t d -H .git ~/Proyectos ~/.config/nvim ~/Notas-Markdown ~/Escritorio/Facultad/ --exec dirname {} \; | sort -u | while read d; do
+        if [[ -n $(git -C "$d" status --short) ]]; then
+            echo "1 $d"
+        else
+            echo "2 $d"
+        fi
+        done | sort | cut -d' ' -f2- | fzf --preview '
+            echo "📁 Contenido:\n" &&
+            (exa --color=always -la {} || ls -la {}) &&
+            echo "\n\033[32m󰊢 Git Status:\033[0m" &&
+            git -C {} -c color.status=always status --short
+        ')
+    [[ -n $dir ]] && cd "$dir"
+}
+
+findgit-widget() {
+    zle -I
+    _findgit
+    zle reset-prompt
+}
 
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                       WIDGET REGISTRATION                        ║
@@ -193,8 +201,27 @@ delete_last_path_component() {
 # Register custom widgets
 zle -N fzf-history-widget
 zle -N delete_last_path_component
+zle -N history-substring-search-up
+zle -N history-substring-search-down
+zle -N findgit-widget
 
-# Bind custom widgets to keys
+
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║                        KEY BINDINGS                              ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+# History substring search bindings
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# Other key bindings
+bindkey "^[[Z" reverse-menu-complete
+bindkey "^[[3~" delete-char
+
+bindkey '^G' findgit-widget
+
 bindkey '^R' fzf-history-widget
 bindkey '^H' delete_last_path_component  # Ctrl+Backspace
 
