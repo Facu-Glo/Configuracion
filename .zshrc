@@ -173,18 +173,20 @@ delete_last_path_component() {
 # Funcion para buscar proyectos con git
 _findgit() {
     local dir
-    dir=$(fd -t d -H .git ~/Proyectos ~/.config/nvim ~/Notas-Markdown ~/Escritorio/Facultad/ --exec dirname {} \; | sort -u | while read d; do
-        if [[ -n $(git -C "$d" status --short) ]]; then
-            echo "1 $d"
-        else
-            echo "2 $d"
-        fi
-        done | sort | cut -d' ' -f2- | fzf --preview '
-            echo "📁 Contenido:\n" &&
-            (exa --color=always -la {} || ls -la {}) &&
-            echo "\n\033[32m󰊢 Git Status:\033[0m" &&
-            git -C {} -c color.status=always status --short
-        ')
+    dir=$(
+        fd -t d -H .git ~/Proyectos ~/.config/nvim ~/Notas-Markdown ~/Escritorio/Facultad/ --exec dirname {} \; | sort -u | while read d; do
+            if [[ -n $(git -C "$d" status --short) ]]; then
+                echo -e "1\t$d\t\033[36m$d\033[0m"
+            else
+                echo -e "2\t$d\t\033[88m$d\033[0m"
+            fi
+        done | sort | cut -f2,3 | fzf --ansi --with-nth=2 --preview '
+            echo "\033[32m󰊢 Git Status:\033[0m" &&
+            git -C {1} -c color.status=always status --short
+            echo "\n📁 Contenido:" &&
+            (exa --color=always -la {1} || ls -la {1}) &&
+        ' | cut -f1
+        )
     [[ -n $dir ]] && cd "$dir"
 }
 
