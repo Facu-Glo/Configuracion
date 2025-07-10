@@ -182,7 +182,12 @@ _findgit() {
             fi
         done | sort | cut -f2,3 | fzf --ansi --with-nth=2 --preview '
             echo "\033[32m󰊢 Git Status:\033[0m" &&
-            git -C {1} -c color.status=always status --short
+            status_output=$(git -C {1} -c color.status=always status --short)
+            if [[ -n "$status_output" ]]; then
+                echo "$status_output"
+            else
+                echo "No hay modificaciones"
+            fi
             echo "\n📁 Contenido:" &&
             (exa --color=always -la {1} || ls -la {1}) &&
         ' | cut -f1
