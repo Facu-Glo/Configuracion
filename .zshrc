@@ -176,9 +176,9 @@ _findgit() {
     dir=$(
         fd -t d -H .git ~/Proyectos ~/.config/nvim ~/Notas-Markdown ~/Escritorio/Facultad/ --exec dirname {} \; | sort -u | while read d; do
             if [[ -n $(git -C "$d" status --short) ]]; then
-                echo -e "1\t$d\t\033[36m$d\033[0m"
+                echo -e "1\t$d\t\033[31m$d\033[0m"
             else
-                echo -e "2\t$d\t\033[88m$d\033[0m"
+                echo -e "2\t$d\t\033[37m$d\033[0m"
             fi
         done | sort | cut -f2,3 | fzf --ansi --with-nth=2 --preview '
             echo "\033[32m󰊢 Git Status:\033[0m" &&
