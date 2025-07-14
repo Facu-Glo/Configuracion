@@ -5,11 +5,10 @@
 #: kitty has very powerful font management. You can configure
 #: individual font faces and even specify special fonts for particular
 #: characters.
-
-font_family      FiraCode Nerd Font
-bold_font        auto
-italic_font      auto
-bold_italic_font auto
+# font_family      FiraCode Nerd Font
+# bold_font        FiraCode Nerd Font bold
+# italic_font      auto
+# bold_italic_font auto
 
 #: You can specify different fonts for the bold/italic/bold-italic
 #: variants. The easiest way to select fonts is to run the `kitten
@@ -20,7 +19,7 @@ bold_italic_font auto
 #: <https://sw.kovidgoyal.net/kitty/kittens/choose-fonts/#font-spec-
 #: syntax>.
 
-font_size 12.0
+font_size 11.5
 
 #: Font size (in pts).
 
@@ -772,7 +771,7 @@ copy_on_select yes
 
 #: Terminal bell {{{
 
-# enable_audio_bell yes
+enable_audio_bell no
 
 #: The audio bell. Useful to disable it in environments that require
 #: silence.
@@ -885,14 +884,14 @@ enabled_layouts tall,stack
 #: to be pts. Note that borders are displayed only when more than one
 #: window is visible. They are meant to separate multiple windows.
 
-draw_minimal_borders yes
+draw_minimal_borders no
 
 #: Draw only the minimum borders needed. This means that only the
 #: borders that separate the window from a neighbor are drawn. Note
 #: that setting a non-zero window_margin_width overrides this and
 #: causes all borders to be drawn.
 
-# window_margin_width 0
+window_margin_width 0
 
 #: The window margin (in pts) (blank area outside the border). A
 #: single value sets all four sides. Two values set the vertical and
@@ -947,12 +946,12 @@ draw_minimal_borders yes
 #: The color for the border of inactive windows in which a bell has
 #: occurred.
 
-inactive_text_alpha 0.2
+inactive_text_alpha 1
 
 #: Fade the text in inactive windows by the specified amount (a number
 #: between zero and one, with zero being fully faded).
 
-# hide_window_decorations no
+hide_window_decorations yes
 
 #: Hide the window decorations (title-bar and window borders) with
 #: yes. On macOS, titlebar-only and titlebar-and-corners can be used
@@ -1093,7 +1092,7 @@ tab_bar_style fade
 #: The horizontal alignment of the tab bar, can be one of: left,
 #: center, right.
 
-tab_bar_min_tabs 1
+tab_bar_min_tabs 2
 
 #: The minimum number of tabs that must exist before the tab bar is
 #: shown.
@@ -1224,7 +1223,7 @@ tab_bar_min_tabs 1
 
 #: The foreground and background colors.
 
-# background_opacity 1.0
+background_opacity 1.0
 
 #: The opacity of the background. A number between zero and one, where
 #: one is opaque and zero is fully transparent. This will only work if
@@ -2132,7 +2131,7 @@ action_alias launch_tab launch --type=tab --cwd=current
 #: New window
 
 map kitty_mod+enter new_window
-map kitty_mod+o new_window
+map kitty_mod+o launch --cwd=current
 # map cmd+enter       new_window
 
 #::  You can open a new kitty window running an arbitrary program, for
@@ -2208,26 +2207,31 @@ map ctrl+alt+{ previous_window
 
 # map kitty_mod+1 first_window
 # map cmd+1       first_window
+map alt+1 first_window
 
 #: Second window
 
 # map kitty_mod+2 second_window
 # map cmd+2       second_window
+map alt+2 second_window
 
 #: Third window
 
 # map kitty_mod+3 third_window
 # map cmd+3       third_window
+map alt+3 third_window
 
 #: Fourth window
 
 # map kitty_mod+4 fourth_window
 # map cmd+4       fourth_window
+map alt+4 fourth_window
 
 #: Fifth window
 
 # map kitty_mod+5 fifth_window
 # map cmd+5       fifth_window
+map alt+5 fifth_window
 
 #: Sixth window
 
@@ -2268,6 +2272,10 @@ map ctrl+alt+{ previous_window
 # map kitty_mod+f8 swap_with_window
 
 #::  Works like focus_visible_window above, but swaps the window.
+map kitty_mod+left resize_window narrower
+map kitty_mod+right resize_window wider
+map kitty_mod+up resize_window taller
+map kitty_mod+down resize_window shorter 3
 
 #: }}}
 
@@ -2289,6 +2297,8 @@ map ctrl+shift+tab previous_tab
 
 map kitty_mod+t new_tab
 map ctrl+t new_tab
+map kitty_mod+t new_tab_with_cwd
+
 # map cmd+t       new_tab
 
 #: Close tab
@@ -2671,6 +2681,14 @@ map ctrl+alt+z toggle_layout stack
 
 
 # BEGIN_KITTY_THEME
-# Ayu Mirage
+# Tokyo Night
 include current-theme.conf
 # END_KITTY_THEME
+
+
+# BEGIN_KITTY_FONTS
+font_family      family="Hack Nerd Font"
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+# END_KITTY_FONTS
