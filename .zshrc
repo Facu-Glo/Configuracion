@@ -37,7 +37,13 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' menu no
 
 # FZF Tab styles
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:*' fzf-preview '
+if [ -d "$realpath" ]; then
+    eza --icons --tree --level=2 --color=always "$realpath"
+elif [ -f "$realpath" ]; then
+    bat -n --color=always --line-range :500 "$realpath"
+fi
+'
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
 # Enable dircolors
@@ -96,7 +102,7 @@ alias fl='y'
 # Editors
 alias nv='nvim'
 alias vim='nvim'
-alias nvim-alt='NVIM_APPNAME=nvim-alt nvim'
+alias nvimLazy='NVIM_APPNAME=nvimLazyvim nvim'
 
 # Applications
 alias ff='fastfetch'
