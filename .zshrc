@@ -26,6 +26,9 @@ source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring
 # Syntax Highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# Vi mod
+source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                        COMPLETION STYLES                         ║
 # ╚══════════════════════════════════════════════════════════════════╝
