@@ -157,7 +157,7 @@
     },
     {
       "type": "uptime",
-      "key": "   Tiempo ",
+      "key": "    Tiempo",
       "keyColor": "38;2;186;166;255",
     },
     {
