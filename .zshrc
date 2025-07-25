@@ -42,7 +42,7 @@ zstyle ':completion:*' menu no
 # FZF Tab styles
 zstyle ':fzf-tab:complete:*' fzf-preview '
 if [ -d "$realpath" ]; then
-    eza --icons --tree --level=2 --color=always "$realpath"
+    eza --icons -T --level=2 --color=always "$realpath"
 elif [ -f "$realpath" ]; then
     bat -n --color=always --line-range :500 "$realpath"
 fi
@@ -116,7 +116,6 @@ alias pdf="zathura"
 alias bmake="bear -- make"
 
 # FZF utilities
-alias fzfr="fd . / --type d --hidden --follow --exclude .git | fzf --preview 'tree -C {} | head -100'"
 alias fgit='findgit-widget'
 
 
@@ -141,7 +140,7 @@ _fzf_comprun() {
   local command=$1
   shift
   case "$command" in
-    cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
+    cd)           fzf --preview 'eza --tree --color=always --icons {} | head -200'   "$@" ;;
     export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
     ssh)          fzf --preview 'dig {}'                   "$@" ;;
     *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
@@ -192,6 +191,12 @@ findgit-widget() {
     zle reset-prompt
 }
 
+cdroot() {
+  local dir
+  dir=$(fd . / --type d --hidden --follow --exclude .git \
+        | fzf --preview 'eza --tree --color=always --icons {} | head -100') || return
+  cd "$dir"
+}
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                       WIDGET REGISTRATION                        ║
 # ╚══════════════════════════════════════════════════════════════════╝
