@@ -15,7 +15,7 @@ compinit
 # ╚══════════════════════════════════════════════════════════════════╝
 
 # FZF Tab Plugin
-source ~/.fzf-tab/fzf-tab.plugin.zsh
+source ~/.config/fzf-tab/fzf-tab.plugin.zsh
 
 # Zsh Autosuggestions
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
