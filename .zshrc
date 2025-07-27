@@ -118,6 +118,7 @@ alias bmake="bear -- make"
 # FZF utilities
 alias fgit='findgit-widget'
 
+alias sddm-preview='sddm-greeter-qt6 --test-mode --theme'
 
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                         FZF SETUP                                ║
