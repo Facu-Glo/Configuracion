@@ -108,7 +108,7 @@ alias vim='nvim'
 alias nvimLazy='NVIM_APPNAME=nvimLazyvim nvim'
 
 # Applications
-alias ff='fastfetch'
+alias ff='fastfetch --logo /home/facu/.config/fastfetch/arch-linux.png --logo-width 40 --logo-height 20'
 alias lgit='lazygit'
 alias pdf="zathura"
 
