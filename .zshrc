@@ -120,6 +120,8 @@ alias fgit='findgit-widget'
 
 alias sddm-preview='sddm-greeter-qt6 --test-mode --theme'
 
+alias ghme='gh api user --jq ".html_url" | xargs xdg-open'
+
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                         FZF SETUP                                ║
 # ╚══════════════════════════════════════════════════════════════════╝
