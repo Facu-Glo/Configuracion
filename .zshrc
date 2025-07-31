@@ -97,6 +97,7 @@ esac
 # File operations
 alias ls='ls --color=auto'
 alias ll='eza -la --color=auto --icons'
+alias tree='eza -T'
 alias open='xdg-open'
 
 # Navigation
@@ -110,6 +111,7 @@ alias nvimLazy='NVIM_APPNAME=nvimLazyvim nvim'
 # Applications
 alias ff='fastfetch --logo /home/facu/.config/fastfetch/arch-linux.png --logo-width 40 --logo-height 20'
 alias lgit='lazygit'
+alias ldock='lazydocker'
 alias pdf="zathura"
 
 # Development
