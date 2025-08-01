@@ -26,9 +26,6 @@ source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring
 # Syntax Highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Vi mod
-# source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                        COMPLETION STYLES                         ║
 # ╚══════════════════════════════════════════════════════════════════╝
@@ -186,7 +183,6 @@ delete_last_path_component() {
 }
 
 # Funcion para buscar proyectos con git (Uso mi script)
-
 findgit-widget() {
     local selected_dir
     selected_dir=$(~/.local/bin/findgit)
@@ -218,6 +214,9 @@ zle -N findgit-widget
 # ║                        KEY BINDINGS                              ║
 # ╚══════════════════════════════════════════════════════════════════╝
 
+# Vi Mode
+bindkey -v
+
 # History substring search bindings
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
@@ -232,6 +231,13 @@ bindkey '^G' findgit-widget
 
 bindkey '^R' fzf-history-widget
 bindkey '^H' delete_last_path_component  # Ctrl+Backspace
+
+bindkey -M viins '^U' backward-kill-line
+bindkey -M viins '^W' backward-kill-word
+bindkey -M viins '^A' beginning-of-line
+bindkey -M viins '^E' end-of-line
+bindkey -M viins '^L' clear-screen
+bindkey -M viins '^K' kill-line
 
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                      EXTERNAL TOOLS INIT                         ║
