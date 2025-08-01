@@ -10,6 +10,8 @@
 autoload -Uz compinit
 compinit
 
+export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=green,fg=black,bold"
+
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                          PLUGINS                                 ║
 # ╚══════════════════════════════════════════════════════════════════╝
@@ -220,8 +222,16 @@ bindkey -v
 # History substring search bindings
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
+
+# Up arrow
 bindkey '^[[A' history-substring-search-up
+# Down arrow
 bindkey '^[[B' history-substring-search-down
+# Alt j
+bindkey '^[j' history-substring-search-down
+# Alt k
+bindkey '^[k' history-substring-search-up
+
 
 # Other key bindings
 bindkey "^[[Z" reverse-menu-complete
