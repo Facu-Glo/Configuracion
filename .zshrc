@@ -248,6 +248,7 @@ bindkey -M viins '^A' beginning-of-line
 bindkey -M viins '^E' end-of-line
 bindkey -M viins '^L' clear-screen
 bindkey -M viins '^K' kill-line
+bindkey -M viins '^?' backward-delete-char
 
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                      EXTERNAL TOOLS INIT                         ║
