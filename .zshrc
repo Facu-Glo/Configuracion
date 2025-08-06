@@ -241,7 +241,7 @@ bindkey "^[[3~" delete-char
 bindkey '^G' findgit-widget
 
 bindkey '^R' fzf-history-widget
-bindkey '^H' delete_last_path_component  # Ctrl+Backspace
+bindkey '^H' delete_last_path_component  
 
 bindkey -M viins '^U' backward-kill-line
 bindkey -M viins '^W' backward-kill-word
