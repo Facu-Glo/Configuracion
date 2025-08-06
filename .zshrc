@@ -12,6 +12,9 @@ compinit
 
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=green,fg=black,bold"
 
+# Vi Mode
+bindkey -v
+
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                          PLUGINS                                 ║
 # ╚══════════════════════════════════════════════════════════════════╝
@@ -79,7 +82,7 @@ setopt complete_in_word
 export PATH="$PATH:$HOME/.local/bin"
 export EDITOR=nvim
 export TERMINAL=kitty
-export FZF_DEFAULT_OPTS="--style=full --layout=reverse --height=40% --tiebreak=begin"
+export FZF_DEFAULT_OPTS="--style=full --layout=reverse --height=50% --tiebreak=length"
 export FZF_COMPLETION_TRIGGER=',,'
 
 export PNPM_HOME="/home/facu/.local/share/pnpm"
@@ -147,7 +150,7 @@ _fzf_comprun() {
     cd)           fzf --preview 'eza --tree --color=always --icons {} | head -200'   "$@" ;;
     export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
     ssh)          fzf --preview 'dig {}'                   "$@" ;;
-    *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
+    *)            fzf --preview 'eza -l --color=always --icons {}' "$@" ;;
   esac
 }
 
@@ -216,8 +219,6 @@ zle -N findgit-widget
 # ║                        KEY BINDINGS                              ║
 # ╚══════════════════════════════════════════════════════════════════╝
 
-# Vi Mode
-bindkey -v
 
 # History substring search bindings
 autoload -U up-line-or-beginning-search
