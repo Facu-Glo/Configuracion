@@ -42,13 +42,13 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
-theme = tokyonight-storm
+theme = tokyonight_night
 
-window-decoration = false
+window-decoration = true
 # gtk-titlebar = true
 # gtk-adwaita = true
-font-size = 12
-font-family = FiraCode Nerd Font Reg
+font-size = 11.5
+# font-family = FiraCode Nerd Font Reg
 window-theme=ghostty
 maximize = true
 
