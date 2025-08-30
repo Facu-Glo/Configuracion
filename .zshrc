@@ -203,6 +203,16 @@ cdroot() {
         | fzf --preview 'eza --tree --color=always --icons {} | head -100') || return
   cd "$dir"
 }
+
+fzf-facultad-widget() {
+    local selected_dir
+    selected_dir=$(fd -t d . ~/Escritorio/Facultad -d 1 | fzf --preview 'eza --color=always -al {}' --preview-window=right:50%)
+    if [[ -n "$selected_dir" ]]; then
+        cd "$selected_dir"
+    fi
+    zle reset-prompt
+}
+
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                       WIDGET REGISTRATION                        ║
 # ╚══════════════════════════════════════════════════════════════════╝
@@ -213,7 +223,7 @@ zle -N delete_last_path_component
 zle -N history-substring-search-up
 zle -N history-substring-search-down
 zle -N findgit-widget
-
+zle -N fzf-facultad-widget
 
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                        KEY BINDINGS                              ║
@@ -251,6 +261,7 @@ bindkey -M viins '^L' clear-screen
 bindkey -M viins '^K' kill-line
 bindkey -M viins '^?' backward-delete-char
 
+bindkey '^F' fzf-facultad-widget
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                      EXTERNAL TOOLS INIT                         ║
 # ╚══════════════════════════════════════════════════════════════════╝
