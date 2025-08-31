@@ -2681,7 +2681,7 @@ map ctrl+alt+z toggle_layout stack
 
 
 # BEGIN_KITTY_THEME
-# Ayu
+# bl1nk
 include current-theme.conf
 # END_KITTY_THEME
 
