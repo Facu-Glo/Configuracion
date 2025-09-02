@@ -88,8 +88,8 @@ format = '\[[$symbol$context]($style)\]'
 format = '\[[$symbol($version)(🎯 $tfm)]($style)\]'
 
 [elixir]
-symbol = " "
-format = '\[[$symbol($version \(OTP $otp_version\))]($style)\]'
+symbol = "  "
+format = '\[[$symbol]($style)\]'
 
 [elm]
 symbol = " "
