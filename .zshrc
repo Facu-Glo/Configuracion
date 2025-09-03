@@ -213,6 +213,20 @@ fzf-facultad-widget() {
     zle reset-prompt
 }
 
+zle-keymap-select() {
+  if [[ $KEYMAP == vicmd ]] ; then
+    echo -ne '\e[2 q'  # cursor bloque para modo normal
+  else
+    echo -ne '\e[6 q'  # cursor barra para modo inserción
+  fi
+  zle reset-prompt
+}
+
+zle-line-init() {
+  echo -ne '\e[6 q'  # cursor barra al iniciar la línea
+  zle reset-prompt
+}
+
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                       WIDGET REGISTRATION                        ║
 # ╚══════════════════════════════════════════════════════════════════╝
@@ -224,6 +238,8 @@ zle -N history-substring-search-up
 zle -N history-substring-search-down
 zle -N findgit-widget
 zle -N fzf-facultad-widget
+zle -N zle-keymap-select
+zle -N zle-line-init
 
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                        KEY BINDINGS                              ║
