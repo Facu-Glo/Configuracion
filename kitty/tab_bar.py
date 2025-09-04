@@ -81,11 +81,15 @@ def _draw_left_status(
 
     # Ícono en la primera tab
     if index == 1:
+        title = active_tab.active_oldest_exe
         screen.cursor.italic = False
         screen.cursor.bold = False
         screen.cursor.fg = as_rgb(0x81C8BE)
         screen.cursor.bg = as_rgb(0x232634)
-        screen.draw(" ")
+        # cell = " "
+        # cell = f"  {title}"
+        cell = f"  {title}"
+        screen.draw(cell)
 
     # Separador izquierdo
     if tab.is_active:
