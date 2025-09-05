@@ -41,20 +41,16 @@
 # # which is explained in the docs for that config option.
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
+#
 
-theme = tokyonight_night
-
-window-decoration = true
-# gtk-titlebar = true
-# gtk-adwaita = true
-font-size = 11.5
-# font-family = FiraCode Nerd Font Reg
+font-size = 11
+theme = tokyonight
+background = #121212
 window-theme=ghostty
-maximize = true
+background-opacity = 0.95
+gtk-titlebar = false
+# maximize = true
 
 keybind = ctrl+shift+r=reload_config
 keybind = ctrl+shift+w=close_surface
-keybind = ctrl+t=new_tab
-keybind = ctrl+l=clear_screen
 keybind = ctrl+shift+p=toggle_window_decorations
-keybind = ctrl+alt+m=toggle_tab_overview
