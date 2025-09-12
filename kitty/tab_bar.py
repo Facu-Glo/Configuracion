@@ -83,9 +83,10 @@ def _draw_left_status(
     if index == 1:
         title = active_tab.active_oldest_exe
         screen.cursor.italic = False
-        screen.cursor.bold = False
+        screen.cursor.bold = True
         screen.cursor.fg = as_rgb(0x81C8BE)
-        screen.cursor.bg = as_rgb(0x232634)
+        screen.cursor.bg = as_rgb(int(draw_data.inactive_bg))
+        # screen.cursor.bg = as_rgb(0x232634)
         # cell = " "
         # cell = f"  {title}"
         cell = f"  {title}"
