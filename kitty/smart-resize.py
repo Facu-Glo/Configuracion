@@ -1,5 +1,7 @@
 from kittens.tui.handler import result_handler
 
+RESIZE_STEP = 1
+
 def main(args):
     pass
 
@@ -10,59 +12,38 @@ def handle_result(args, result, target_window_id, boss):
         return
 
     direction = args[1]
-
     neighbors = boss.active_tab.current_layout.neighbors_for_window(window, boss.active_tab.windows)
-    current_window_id = boss.active_tab.active_window
 
-    left_neighbors = neighbors.get('left')
-    right_neighbors = neighbors.get('right')
-    top_neighbors = neighbors.get('top')
-    bottom_neighbors = neighbors.get('bottom')
+    rules = {
+        "left":   ("wider", "narrower"),
+        "right":  ("narrower", "wider"),
+        "up":     ("taller", "shorter"),
+        "down":   ("shorter", "taller"),
+    }
 
-    # has a neighbor on both sides
-    if direction == 'left' and (left_neighbors and right_neighbors):
-        # boss.active_tab.set_active_window(left_neighbors[0])
-        boss.active_tab.resize_window('narrower', 2)
-        # boss.active_tab.set_active_window(current_window_id)
-    # only has left neighbor
-    elif direction == 'left' and left_neighbors:
-        boss.active_tab.resize_window('wider', 2)
-    # only has right neighbor
-    elif direction == 'left' and right_neighbors:
-        boss.active_tab.resize_window('narrower', 2)
+    sides = {
+        "left":   ("left", "right"),
+        "right":  ("left", "right"),
+        "up":     ("top", "bottom"),
+        "down":   ("top", "bottom"),
+    }
 
-    # has a neighbor on both sides
-    elif direction == 'right' and (left_neighbors and right_neighbors):
-        # boss.active_tab.set_active_window(left_neighbors[0])
-        boss.active_tab.resize_window('wider', 2)
-        # boss.active_tab.set_active_window(current_window_id)
-    # only has left neighbor
-    elif direction == 'right' and left_neighbors:
-        boss.active_tab.resize_window('narrower', 2)
-    # only has right neighbor
-    elif direction == 'right' and right_neighbors:
-        boss.active_tab.resize_window('wider', 2)
+    if direction not in rules:
+        return
 
-    # has a neighbor above and below
-    elif direction == 'up' and (top_neighbors and bottom_neighbors):
-        # boss.active_tab.set_active_window(top_neighbors[0])
-        boss.active_tab.resize_window('shorter', 2)
-        # boss.active_tab.set_active_window(current_window_id)
-    # only has top neighbor
-    elif direction == 'up' and top_neighbors:
-        boss.active_tab.resize_window('taller', 2)
-    # only has bottom neighbor
-    elif direction == 'up' and bottom_neighbors:
-        boss.active_tab.resize_window('shorter', 2)
+    primary, secondary = rules[direction]
+    first, second = sides[direction]
 
-    # has a neighbor above and below
-    elif direction == 'down' and (top_neighbors and bottom_neighbors):
-        # boss.active_tab.set_active_window(top_neighbors[0])
-        boss.active_tab.resize_window('taller', 2)
-        # boss.active_tab.set_active_window(current_window_id)
-    # only has top neighbor
-    elif direction == 'down' and top_neighbors:
-        boss.active_tab.resize_window('shorter', 2)
-    # only has bottom neighbor
-    elif direction == 'down' and bottom_neighbors:
-        boss.active_tab.resize_window('taller', 2)
+    has_first = bool(neighbors.get(first))
+    has_second = bool(neighbors.get(second))
+
+    if has_first and has_second:
+        action = secondary
+    elif has_first:
+        action = primary
+    elif has_second:
+        action = secondary
+    else:
+        return
+
+    boss.active_tab.resize_window(action, RESIZE_STEP)
