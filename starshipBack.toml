@@ -11,7 +11,7 @@ $java\
 $kotlin\
 $haskell\
 $python\
-$elixir\
+${custom.elixir_version}\
 $docker_context\
 $conda\
 $line_break\
@@ -88,8 +88,18 @@ format = '\[[$symbol$context]($style)\]'
 format = '\[[$symbol($version)(🎯 $tfm)]($style)\]'
 
 [elixir]
-symbol = "  "
-format = '\[[$symbol]($style)\]'
+symbol = ""
+format = '\[[$symbol ($version)]($style)\]'
+disabled = true
+ 
+[custom.elixir_version]
+command = 'elixir --short-version'
+detect_files = ['mix.exs', '.iex.exs']
+detect_folders = ['_build', 'deps']
+detect_extensions = ['ex', 'exs']
+symbol = ""
+style = 'bold purple'
+format = '\[[$symbol ($output)]($style)\]'
 
 [elm]
 symbol = " "
