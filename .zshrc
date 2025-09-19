@@ -98,7 +98,8 @@ esac
 
 # File operations
 alias ls='ls --color=auto'
-alias ll='eza -la --color=auto --icons'
+alias ll='eza -l --color=auto'
+alias la='eza -la --color=auto'
 alias tree='eza -T'
 alias open='xdg-open'
 
