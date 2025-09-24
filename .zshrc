@@ -116,6 +116,7 @@ alias ff='fastfetch --logo /home/facu/.config/fastfetch/arch-linux'
 alias lgit='lazygit'
 alias ldock='lazydocker'
 alias pdf="zathura"
+alias icat="kitten icat"
 
 # Development
 alias bmake="bear -- make"
