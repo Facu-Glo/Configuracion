@@ -101,6 +101,8 @@ alias ls='ls --color=auto'
 alias ll='eza -l --color=auto'
 alias la='eza -la --color=auto'
 alias tree='eza -T'
+alias lt1='eza -lTg --level=1 --icons=always'
+alias lt2='eza -lTg --level=2 --icons=always'
 alias open='xdg-open'
 
 # Navigation
