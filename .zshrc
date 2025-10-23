@@ -3,6 +3,23 @@
 # ===================================================================
 
 # ╔══════════════════════════════════════════════════════════════════╗
+# ║                        LENGUAJE VERSION                          ║
+# ╚══════════════════════════════════════════════════════════════════╝
+export ASDF_DATA_DIR="$HOME/.asdf"
+# Poner el bin de asdf primero
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
+# Autocompletado
+if [ -f "$HOME/.asdf/completions/_asdf" ]; then
+  fpath=($HOME/.asdf/completions $fpath)
+else
+  mkdir -p "$HOME/.asdf/completions"
+  asdf completion zsh > "$HOME/.asdf/completions/_asdf"
+  fpath=($HOME/.asdf/completions $fpath)
+fi
+
+autoload -Uz compinit && compinit
+# ╔══════════════════════════════════════════════════════════════════╗
 # ║                           CORE SETUP                             ║
 # ╚══════════════════════════════════════════════════════════════════╝
 
@@ -289,4 +306,5 @@ bindkey '^F' fzf-facultad-widget
 # Initialize external tools
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
+
 
