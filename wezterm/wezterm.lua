@@ -2,10 +2,10 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
-local colors = require("colors")
-local keys = require("keybindings")
-local tabs = require("tabs")
-local utils = require("utils")
+local colors = require("config.colors")
+local keys = require("config.keybindings")
+local tabs = require("config.tabs")
+local utils = require("config.utils")
 
 config.font = wezterm.font("JetBrains Mono Nerd Font")
 config.font_rules = {
