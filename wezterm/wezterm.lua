@@ -8,6 +8,9 @@ local tabs = require("tabs")
 local utils = require("utils")
 
 config.font = wezterm.font("JetBrains Mono Nerd Font")
+config.font_rules = {
+    { intensity = "Bold", font = wezterm.font("JetBrains Mono Nerd Font", { weight = "ExtraBold" }) },
+}
 config.font_size = 12.5
 config.color_scheme = "Tokyo Night (Gogh)"
 config.use_fancy_tab_bar = false
