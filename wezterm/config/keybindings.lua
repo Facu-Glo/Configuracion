@@ -21,6 +21,9 @@ M.keys = {
     { key = 'l', mods = 'CTRL|ALT', action = act.ActivatePaneDirection 'Right' },
     { key = 'k', mods = 'CTRL|ALT', action = act.ActivatePaneDirection 'Up' },
     { key = 'j', mods = 'CTRL|ALT', action = act.ActivatePaneDirection 'Down' },
+
+    -- Index pane
+    { key = '0', mods = 'CTRL',     action = act.PaneSelect { alphabet = '1234567890' } },
 }
 
 M.key_tables = {
