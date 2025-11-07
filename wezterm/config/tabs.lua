@@ -1,22 +1,36 @@
 local M = {}
 
-function M.setup_tab_formatting(wezterm, utils)
+function M.setup_tab_tittle(wezterm, utils)
     wezterm.on("format-tab-title", function(tab, _, _, _, _, _)
         local pane = tab.active_pane
         local cwd_uri = pane.current_working_dir
         local directoryName = cwd_uri and utils.getDirectoryName(cwd_uri.file_path) or "Unknown"
 
-        local process_name = pane.foreground_process_name:match("([^/\\]+)%.exe$")
-            or pane.foreground_process_name:match("([^/\\]+)$")
-
-        if process_name == "zsh" then
-            process_name = directoryName
-        end
-
         local index = tab.tab_index + 1
-        local title = string.format(" %s %s ", index, process_name)
+        local title = string.format(" %s %s ", index, directoryName)
 
         return { { Text = title } }
+    end)
+end
+
+function M.setup_tab(wezterm)
+    wezterm.on("update-status", function(window, pane)
+        local basename = function(s)
+            return string.gsub(s, "(.*[/\\])(.*)", "%2")
+        end
+
+        local cmd = pane:get_foreground_process_name()
+        cmd = cmd and basename(cmd) or "no-proc"
+
+        local bg_color = "#1B1D2B"
+        local fg_color = "#81c8be"
+
+        window:set_left_status(wezterm.format({
+            { Background = { Color = bg_color } },
+            { Foreground = { Color = fg_color } },
+            { Attribute = { Intensity = "Bold" } },
+            { Text = " " .. wezterm.nerdfonts.oct_flame .. " " .. cmd .. "  " },
+        }))
     end)
 end
 

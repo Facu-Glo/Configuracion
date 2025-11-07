@@ -19,7 +19,11 @@ local M = {
         right = '0cell',
         top = '0.6cell',
         bottom = '0.0cell',
-    }
+    },
+    inactive_pane_hsb = {
+        saturation = 0.9,
+        brightness = 0.7,
+    },
 }
 
 return M

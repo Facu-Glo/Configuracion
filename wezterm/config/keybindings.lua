@@ -24,6 +24,7 @@ M.keys = {
 
     -- Index pane
     { key = '0', mods = 'CTRL',     action = act.PaneSelect { alphabet = '1234567890' } },
+    { key = 't', mods = 'LEADER',   action = act.ShowTabNavigator },
 }
 
 M.key_tables = {

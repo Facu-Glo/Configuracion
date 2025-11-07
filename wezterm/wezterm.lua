@@ -7,7 +7,6 @@ local keys = require("config.keybindings")
 
 local tabs = require("config.tabs")
 local utils = require("config.utils")
-local events = require("config.events")
 
 local M = {
   colors = colors,
@@ -21,7 +20,7 @@ for _, map in pairs(M) do
     end
 end
 
-tabs.setup_tab_formatting(wezterm, utils)
-events.setup_status(wezterm)
+tabs.setup_tab_tittle(wezterm, utils)
+tabs.setup_tab(wezterm)
 
 return config
