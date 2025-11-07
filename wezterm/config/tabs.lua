@@ -34,4 +34,25 @@ function M.setup_tab(wezterm)
     end)
 end
 
+function M.setup_status(wezterm)
+    wezterm.on('update-right-status', function(window)
+        local status = ""
+        local status_color = ""
+
+        if window:leader_is_active() then
+            status = "[LEADER]"
+            status_color = "#c099ff"
+        elseif window:active_key_table() then
+            status = "[" .. window:active_key_table() .. "]"
+            status_color = "#e5c890"
+        end
+
+        window:set_right_status(wezterm.format({
+            { Foreground = { Color = status_color } },
+            { Attribute = { Intensity = "Bold" } },
+            { Text = status },
+        }))
+    end)
+end
+
 return M
