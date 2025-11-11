@@ -45,18 +45,27 @@
 
 font-size = 11.5
 theme = TokyoNight
-background = #121212
-window-theme=ghostty
-background-opacity = 0.92
-gtk-titlebar-style=tabs
 font-family = JetBrainsMono Nerd Font
+
+background = #121212
+background-opacity = 0.95
+window-theme = ghostty
+gtk-titlebar-style=tabs
+
 window-padding-balance = true
 window-padding-x = 0
 window-padding-y = 0
 
+maximize = true
 # gtk-titlebar = false
-# maximize = true
 
 keybind = ctrl+shift+r=reload_config
 keybind = ctrl+shift+w=close_surface
-keybind = ctrl+shift+p=toggle_window_decorations
+keybind = ctrl+shift+p=toggle_command_palette
+
+keybind = ctrl+alt+k=goto_split:up
+keybind = ctrl+alt+j=goto_split:down
+keybind = ctrl+alt+l=goto_split:right
+keybind = ctrl+alt+h=goto_split:left
+
+keybind = ctrl+l=clear_screen
