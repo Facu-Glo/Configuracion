@@ -43,12 +43,18 @@
 # resize-overlay-duration = 4s 200ms
 #
 
-font-size = 11
-theme = tokyonight
+font-size = 11.5
+theme = TokyoNight
 background = #121212
 window-theme=ghostty
-background-opacity = 0.95
-gtk-titlebar = false
+background-opacity = 0.92
+gtk-titlebar-style=tabs
+font-family = JetBrainsMono Nerd Font
+window-padding-balance = true
+window-padding-x = 0
+window-padding-y = 0
+
+# gtk-titlebar = false
 # maximize = true
 
 keybind = ctrl+shift+r=reload_config
