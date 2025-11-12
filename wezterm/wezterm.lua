@@ -21,7 +21,7 @@ for _, map in pairs(M) do
 end
 
 tabs.setup_tab_tittle(wezterm, utils)
-tabs.setup_tab(wezterm)
+-- tabs.setup_tab(wezterm)
 tabs.setup_status(wezterm)
 
 return config
