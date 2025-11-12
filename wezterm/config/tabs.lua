@@ -7,7 +7,7 @@ function M.setup_tab_tittle(wezterm, utils)
         local directoryName = cwd_uri and utils.getDirectoryName(cwd_uri.file_path) or "Unknown"
 
         local index = tab.tab_index + 1
-        local title = string.format(" %s %s ", index, directoryName)
+        local title = string.format(" %s: %s ", index, directoryName)
 
         return { { Text = title } }
     end)
