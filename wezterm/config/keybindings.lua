@@ -5,7 +5,7 @@ local M = {}
 M.leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 2000 }
 
 M.keys = {
-    -- Splits
+    -- Pane management
     { key = '|', mods = 'LEADER',   action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
     { key = 'v', mods = 'LEADER',   action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
     { key = '-', mods = 'LEADER',   action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
@@ -25,6 +25,15 @@ M.keys = {
     -- Index pane
     { key = '0', mods = 'CTRL',     action = act.PaneSelect { alphabet = '1234567890' } },
     { key = 't', mods = 'LEADER',   action = act.ShowTabNavigator },
+
+    -- Move pane to new tab
+    {
+        key = '!',
+        mods = 'LEADER | SHIFT',
+        action = wezterm.action_callback(function(win, pane)
+            local tab, window = pane:move_to_new_tab()
+        end),
+    },
 }
 
 M.key_tables = {
@@ -41,11 +50,22 @@ M.key_tables = {
     },
 }
 
+-- Activate tab by number
 for i = 1, 8 do
     table.insert(M.keys, {
         key = tostring(i),
         mods = 'ALT',
         action = act.ActivateTab(i - 1),
+    })
+end
+
+-- Move tab to position
+for i = 1, 8 do
+    -- CTRL+ALT + number to move to that position
+    table.insert(M.keys, {
+        key = tostring(i),
+        mods = 'CTRL|ALT',
+        action = wezterm.action.MoveTab(i - 1),
     })
 end
 
