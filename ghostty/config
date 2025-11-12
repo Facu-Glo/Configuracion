@@ -48,7 +48,8 @@ theme = TokyoNight
 font-family = JetBrainsMono Nerd Font
 
 background = #121212
-background-opacity = 0.95
+background-opacity = 0.92
+window-decoration = server
 window-theme = ghostty
 gtk-titlebar-style=tabs
 
@@ -57,6 +58,8 @@ window-padding-x = 0
 window-padding-y = 0
 
 maximize = true
+window-width = 160
+window-height = 45
 # gtk-titlebar = false
 
 keybind = ctrl+shift+r=reload_config
@@ -68,4 +71,4 @@ keybind = ctrl+alt+j=goto_split:down
 keybind = ctrl+alt+l=goto_split:right
 keybind = ctrl+alt+h=goto_split:left
 
-keybind = ctrl+l=clear_screen
+copy-on-select = clipboard
