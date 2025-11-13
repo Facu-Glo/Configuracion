@@ -6,35 +6,35 @@ M.leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 1000 }
 
 M.keys = {
     -- Pane management
-    { key = '|', mods = 'LEADER',     action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
-    { key = 'v', mods = 'LEADER',     action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
-    { key = '-', mods = 'LEADER',     action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
-    { key = 's', mods = 'LEADER',     action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
+    { key = '|', mods = 'LEADER',   action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
+    { key = 'v', mods = 'LEADER',   action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
+    { key = '-', mods = 'LEADER',   action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
+    { key = 's', mods = 'LEADER',   action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
 
-    { key = 'x', mods = 'LEADER',     action = act.CloseCurrentPane { confirm = true } },
+    { key = 'x', mods = 'LEADER',   action = act.CloseCurrentPane { confirm = true } },
 
     -- Activate resize mode
-    { key = 'r', mods = 'LEADER',     action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false } },
+    { key = 'r', mods = 'LEADER',   action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false } },
 
     -- Rotate Panes
-    { key = 'p', mods = 'LEADER',     action = act.ActivateKeyTable { name = 'rotate_pane', one_shot = false } },
+    { key = 'p', mods = 'LEADER',   action = act.ActivateKeyTable { name = 'rotate_pane', one_shot = false } },
 
     -- Scroll
-    { key = 'n', mods = 'LEADER',     action = act.ActivateKeyTable { name = 'navegation', one_shot = false } },
+    { key = 'n', mods = 'LEADER',   action = act.ActivateKeyTable { name = 'navegation', one_shot = false } },
 
     -- Scroll to prompt
     -- { key = 'k', mods = 'CTRL', action = act.ScrollToPrompt(-1) },
     -- { key = 'j', mods = 'CTRL', action = act.ScrollToPrompt(1) },
 
     -- Move between panes with CTRL + ALT + HJKL
-    { key = 'h', mods = 'CTRL|ALT',   action = act.ActivatePaneDirection 'Left' },
-    { key = 'l', mods = 'CTRL|ALT',   action = act.ActivatePaneDirection 'Right' },
-    { key = 'k', mods = 'CTRL|ALT',   action = act.ActivatePaneDirection 'Up' },
-    { key = 'j', mods = 'CTRL|ALT',   action = act.ActivatePaneDirection 'Down' },
+    { key = 'h', mods = 'CTRL|ALT', action = act.ActivatePaneDirection 'Left' },
+    { key = 'l', mods = 'CTRL|ALT', action = act.ActivatePaneDirection 'Right' },
+    { key = 'k', mods = 'CTRL|ALT', action = act.ActivatePaneDirection 'Up' },
+    { key = 'j', mods = 'CTRL|ALT', action = act.ActivatePaneDirection 'Down' },
 
     -- Index pane
-    { key = '0', mods = 'CTRL',       action = act.PaneSelect { alphabet = '1134167890' } },
-    { key = 't', mods = 'LEADER',     action = act.ShowTabNavigator },
+    { key = '0', mods = 'CTRL',     action = act.PaneSelect { alphabet = '1134167890' } },
+    { key = 't', mods = 'LEADER',   action = act.ShowTabNavigator },
 
     -- Move pane to new tab
     {
@@ -70,6 +70,8 @@ M.key_tables = {
         { key = 'd',      action = act.ScrollByPage(1) },
         { key = 'G',      action = act.ScrollToBottom },
         { key = 'g',      action = act.ActivateKeyTable { name = 'goto_mode', one_shot = true } },
+        { key = 'z',      action = act.ScrollToPrompt(-1) },
+        { key = 'x',      action = act.ScrollToPrompt(1) },
         { key = 'Escape', action = 'PopKeyTable' },
     },
     goto_mode = {
