@@ -23,8 +23,8 @@ M.keys = {
     { key = 'n', mods = 'LEADER',     action = act.ActivateKeyTable { name = 'navegation', one_shot = false } },
 
     -- Scroll to prompt
-    { key = 'k', mods = 'CTRL', action = act.ScrollToPrompt(-1) },
-    { key = 'j', mods = 'CTRL', action = act.ScrollToPrompt(1) },
+    -- { key = 'k', mods = 'CTRL', action = act.ScrollToPrompt(-1) },
+    -- { key = 'j', mods = 'CTRL', action = act.ScrollToPrompt(1) },
 
     -- Move between panes with CTRL + ALT + HJKL
     { key = 'h', mods = 'CTRL|ALT',   action = act.ActivatePaneDirection 'Left' },
