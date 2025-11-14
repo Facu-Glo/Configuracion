@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local M = {}
 
-M.leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 1000 }
+M.leader = { key = 'b', mods = 'ALT', timeout_milliseconds = 3000 }
 
 M.keys = {
     -- Pane management
