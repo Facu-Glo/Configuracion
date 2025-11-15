@@ -145,7 +145,9 @@ alias fgit='findgit-widget'
 
 alias sddm-preview='sddm-greeter-qt6 --test-mode --theme'
 
+# Github
 alias ghme='gh api user --jq ".html_url" | xargs xdg-open'
+alias repo='gh repo view --web'
 
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                         FZF SETUP                                ║
@@ -308,3 +310,6 @@ eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
