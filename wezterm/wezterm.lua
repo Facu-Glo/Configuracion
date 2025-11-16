@@ -4,7 +4,7 @@ local config = wezterm.config_builder()
 local configuration = {
   colors = require("config.colors"),
   keys = require("config.keybindings"),
-  style = require("config.style"),
+  style = require("config.config"),
 }
 
 local tabs = require("config.tabs")

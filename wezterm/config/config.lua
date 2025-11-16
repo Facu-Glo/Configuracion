@@ -24,6 +24,13 @@ local M = {
         saturation = 0.9,
         brightness = 0.7,
     },
+    mouse_bindings = {
+        {
+            event = { Up = { streak = 1, button = 'Left' } },
+            mods = 'NONE',
+            action = wezterm.action.CompleteSelectionOrOpenLinkAtMouseCursor 'Clipboard',
+        },
+    },
 }
 
 return M
