@@ -33,7 +33,7 @@ M.keys = {
     { key = 'j', mods = 'CTRL|ALT', action = act.ActivatePaneDirection 'Down' },
 
     -- Index pane
-    { key = '0', mods = 'CTRL',     action = act.PaneSelect { alphabet = '1134167890' } },
+    { key = '0', mods = 'CTRL',     action = act.PaneSelect { alphabet = '1234567890' } },
     { key = 't', mods = 'LEADER',   action = act.ShowTabNavigator },
 
     -- Move pane to new tab
