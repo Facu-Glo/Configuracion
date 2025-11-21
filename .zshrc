@@ -100,7 +100,7 @@ export PATH="$PATH:$HOME/.local/bin"
 export EDITOR=nvim
 export TERMINAL=kitty
 export FZF_DEFAULT_OPTS="--style=full --layout=reverse --height=50% --tiebreak=length"
-export FZF_COMPLETION_TRIGGER=',,'
+export FZF_COMPLETION_TRIGGER='**'
 
 export PNPM_HOME="/home/facu/.local/share/pnpm"
 
@@ -120,6 +120,7 @@ alias la='eza -la --color=auto'
 alias tree='eza -T'
 alias lt1='eza -lTg --level=1 --icons=always'
 alias lt2='eza -lTg --level=2 --icons=always'
+alias lt3='eza -lTg --level=3 --icons=always'
 alias open='xdg-open'
 
 # Navigation
