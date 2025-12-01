@@ -141,9 +141,6 @@ alias icat="kitten icat"
 # Development
 alias bmake="bear -- make"
 
-# FZF utilities
-alias fgit='findgit-widget'
-
 alias sddm-preview='sddm-greeter-qt6 --test-mode --theme'
 
 # Github
@@ -212,13 +209,17 @@ delete_last_path_component() {
 }
 
 # Funcion para buscar proyectos con git (Uso mi script)
-findgit-widget() {
+fgit() {
     local selected_dir
     selected_dir=$(~/.local/bin/findgit)
     if [[ -n "$selected_dir" ]]; then
         cd "$selected_dir"
     fi
-    zle reset-prompt
+}
+
+findgit-widget() {
+    fgit
+    zle accept-line
 }
 
 cdroot() {
@@ -237,17 +238,13 @@ fzf-facultad-widget() {
     zle reset-prompt
 }
 
-zle-keymap-select() {
+# Cursor
+function zle-line-init zle-keymap-select {
   if [[ $KEYMAP == vicmd ]] ; then
-    echo -ne '\e[2 q'  # cursor bloque para modo normal
+    echo -ne '\e[2 q\e]12;green\x7'
   else
-    echo -ne '\e[1 q'  # cursor barra para modo inserción
+    echo -ne '\e[1 q\e]12;grey\x7'
   fi
-  zle reset-prompt
-}
-
-zle-line-init() {
-  echo -ne '\e[1 q'  # cursor barra al iniciar la línea
   zle reset-prompt
 }
 
