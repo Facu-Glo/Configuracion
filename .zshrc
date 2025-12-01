@@ -241,13 +241,13 @@ zle-keymap-select() {
   if [[ $KEYMAP == vicmd ]] ; then
     echo -ne '\e[2 q'  # cursor bloque para modo normal
   else
-    echo -ne '\e[6 q'  # cursor barra para modo inserción
+    echo -ne '\e[1 q'  # cursor barra para modo inserción
   fi
   zle reset-prompt
 }
 
 zle-line-init() {
-  echo -ne '\e[6 q'  # cursor barra al iniciar la línea
+  echo -ne '\e[1 q'  # cursor barra al iniciar la línea
   zle reset-prompt
 }
 
