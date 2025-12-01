@@ -2,9 +2,9 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 local configuration = {
-  colors = require("config.colors"),
+  style = require("config.style"),
   keys = require("config.keybindings"),
-  style = require("config.config"),
+  config_term = require("config.config"),
 }
 
 local tabs = require("config.tabs")

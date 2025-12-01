@@ -1,3 +1,4 @@
+local colores = require("config.color")
 local M = {}
 
 function M.setup_tab_tittle(wezterm, utils)
@@ -22,8 +23,8 @@ function M.setup_tab(wezterm)
         local cmd = pane:get_foreground_process_name()
         cmd = cmd and basename(cmd) or "no-proc"
 
-        local bg_color = "#1B1D2B"
-        local fg_color = "#81c8be"
+        local bg_color = colores.background_terminal
+        local fg_color = colores.status_app
 
         window:set_left_status(wezterm.format({
             { Background = { Color = bg_color } },
@@ -41,10 +42,10 @@ function M.setup_status(wezterm)
 
         if window:leader_is_active() then
             status = "[LEADER]"
-            status_color = "#c099ff"
+            status_color = colores.status_leader
         elseif window:active_key_table() then
             status = "[" .. window:active_key_table() .. "]"
-            status_color = "#e5c890"
+            status_color = colores.status_key_table
         end
 
         window:set_right_status(wezterm.format({
