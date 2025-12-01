@@ -10,6 +10,7 @@ end
 
 local M = {
     background_terminal = '#1c1c1f',
+    -- background_terminal = '#121212',
     background_active_tabs = '#7aa2f7',
     foreground_active_tabs = '#000000',
     foreground_new_tab = '#ffffff',
