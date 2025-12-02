@@ -218,8 +218,13 @@ fgit() {
 }
 
 findgit-widget() {
-    fgit
-    zle accept-line
+    local selected_dir
+    selected_dir=$(~/.local/bin/findgit)
+    zle reset-prompt
+    if [[ -n "$selected_dir" ]]; then
+        cd "$selected_dir"
+        zle accept-line
+    fi
 }
 
 cdroot() {
