@@ -31,6 +31,7 @@ local M = {
             action = wezterm.action.CompleteSelectionOrOpenLinkAtMouseCursor 'Clipboard',
         },
     },
+    enable_wayland = false
 }
 
 return M
