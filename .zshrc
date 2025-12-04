@@ -253,6 +253,10 @@ function zle-line-init zle-keymap-select {
   zle reset-prompt
 }
 
+o() {
+    xdg-open "$@" &> /dev/null &|
+}
+
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                       WIDGET REGISTRATION                        ║
 # ╚══════════════════════════════════════════════════════════════════╝
