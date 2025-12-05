@@ -1,5 +1,10 @@
 local wezterm = require("wezterm")
 
+local function is_hyprland()
+    local session = os.getenv("XDG_CURRENT_DESKTOP") or ""
+    return session:lower():match("hyprland") ~= nil
+end
+
 local M = {
     font = wezterm.font("JetBrains Mono Nerd Font"),
     font_rules = {
@@ -31,7 +36,7 @@ local M = {
             action = wezterm.action.CompleteSelectionOrOpenLinkAtMouseCursor 'Clipboard',
         },
     },
-    enable_wayland = false
+    enable_wayland = not is_hyprland(),
 }
 
 return M
