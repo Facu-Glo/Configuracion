@@ -8,7 +8,9 @@ ICON_MAP = {
     "slack.desktop": "slack_white",
     "postman.desktop": "postman_2",
     "obsidian.desktop": "obsidianV2",
-    "org.kde.okular.desktop": "okular_1"
+    "org.kde.okular.desktop": "okular_1",
+    "org.wezfurlong.wezterm.desktop": "zen_white",
+    "com.obsproject.Studio.desktop": "obs_1"
 }
 
 BASE_PATH = "/usr/share/applications"
