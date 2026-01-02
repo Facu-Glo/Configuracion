@@ -10,7 +10,7 @@ local M = {
     font_rules = {
         { intensity = "Bold", font = wezterm.font("JetBrains Mono Nerd Font", { weight = "ExtraBold" }) },
     },
-    font_size = 11.5,
+    font_size = 14.0,
     color_scheme = "Tokyo Night (Gogh)",
     use_fancy_tab_bar = false,
     window_decorations = "RESIZE",
@@ -22,7 +22,7 @@ local M = {
     window_padding = {
         left = '0cell',
         right = '0cell',
-        top = '0.6cell',
+        top = '0.0cell',
         bottom = '0.0cell',
     },
     inactive_pane_hsb = {
